@@ -1,0 +1,102 @@
+/* ── Intro experience — first visit only ── */
+
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background-color: var(--paper);
+  background-image: var(--texture-coarse);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6);
+  animation: intro-fade-in var(--dur-slow) var(--ease-out);
+}
+
+@keyframes intro-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.intro-skip {
+  position: absolute;
+  top: var(--space-6);
+  right: var(--space-6);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1px solid var(--hairline-strong);
+  color: var(--ink-soft);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  padding: 8px 14px;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: border-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+.intro-skip:hover { border-color: var(--jade-500); color: var(--jade-700); }
+
+.intro-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 560px;
+  width: 100%;
+}
+
+.intro-kicker {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-800);
+  margin-bottom: var(--space-6);
+}
+
+.intro-fan { width: 100%; margin-bottom: var(--space-2); }
+
+.intro-card-hint {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.intro-reveal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out);
+  margin-top: var(--space-7);
+}
+.intro-reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+.intro-mascot { margin-bottom: var(--space-4); }
+
+.intro-title {
+  font-size: var(--text-2xl);
+  line-height: 1.15;
+  max-width: 20ch;
+}
+.intro-title-accent { color: var(--jade-600); font-style: italic; }
+
+.intro-sub {
+  margin-top: var(--space-4);
+  color: var(--ink-soft);
+  font-size: var(--text-base);
+  line-height: 1.7;
+  max-width: 44ch;
+}
+
+.intro-reveal .btn-primary { margin-top: var(--space-6); }
+
+@media (max-width: 560px) {
+  .intro-title { font-size: var(--text-xl); }
+  .intro-skip { top: var(--space-4); right: var(--space-4); padding: 6px 12px; }
+}

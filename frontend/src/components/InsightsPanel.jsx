@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import Icon from "./Icon";
+import Mascot from "./Mascot";
 
 export default function InsightsPanel({ financialContext, apiBase }) {
   const [insights, setInsights] = useState([]);
@@ -24,8 +26,23 @@ export default function InsightsPanel({ financialContext, apiBase }) {
     fetchInsights();
   }, [financialContext]);
 
-  if (loading) return <div className="insights-loading">Generating insights…</div>;
-  if (!insights.length) return null;
+  if (loading) {
+    return (
+      <div className="insights-loading">
+        <Mascot size={36} variant="loading" />
+        <span>Generating insights…</span>
+      </div>
+    );
+  }
+
+  if (!insights.length) {
+    return (
+      <div className="insights-empty">
+        <Mascot size={44} variant="still" />
+        <p>Nothing to flag this month — your numbers are steady.</p>
+      </div>
+    );
+  }
 
   const colorMap = {
     warning: "insight-warning",
@@ -38,7 +55,7 @@ export default function InsightsPanel({ financialContext, apiBase }) {
     <div className="insights-list">
       {insights.map((ins, i) => (
         <div key={i} className={`insight-card ${colorMap[ins.type] || "insight-info"}`}>
-          <span className="insight-icon">{ins.icon}</span>
+          <span className="insight-icon"><Icon name={ins.icon} size={17} /></span>
           <p className="insight-msg">{ins.message}</p>
         </div>
       ))}

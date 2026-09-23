@@ -1,5 +1,14 @@
 node_modules/
 backend/venv/
+backend/.venv/
 backend/__pycache__/
+backend/**/__pycache__/
 backend/cashflo.db
 .DS_Store
+.env
+.env.*
+.claude/settings.local.json
+.claude/launch.json
+brag-output/
+*.xlsx
+

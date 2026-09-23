@@ -1,23 +1,6 @@
 import { useState } from "react";
-
-const CATEGORIES = [
-  { label: "Rent / Mortgage", icon: "🏠" },
-  { label: "Food & Groceries", icon: "🛒" },
-  { label: "Transport", icon: "🚗" },
-  { label: "Entertainment", icon: "🎬" },
-  { label: "Health", icon: "💊" },
-  { label: "Subscriptions", icon: "📱" },
-  { label: "Clothing", icon: "👕" },
-  { label: "Education", icon: "📚" },
-  { label: "Utilities", icon: "💡" },
-  { label: "Savings Transfer", icon: "🏦" },
-  { label: "Other", icon: "📦" },
-];
-
-function getCatIcon(label) {
-  const match = CATEGORIES.find((c) => c.label === label);
-  return match ? match.icon : "📦";
-}
+import Icon from "./Icon";
+import { EXPENSE_CATEGORIES, iconForCategory } from "../utils/categories";
 
 const DEFAULT_EXPENSES = [
   { category: "Rent / Mortgage", amount: "" },
@@ -79,12 +62,12 @@ export default function InputForm({ onSubmit, loading }) {
     <form className="input-form" onSubmit={handleSubmit}>
       <div className="form-row">
         <div className="form-group">
-          <label>💰 Monthly Income ($)</label>
+          <label><Icon name="wallet" size={13} /> Monthly Income ($)</label>
           <input type="number" min="0" step="0.01" placeholder="e.g. 5000"
             value={income} onChange={(e) => setIncome(e.target.value)} required />
         </div>
         <div className="form-group">
-          <label>🏦 Current Savings ($)</label>
+          <label><Icon name="bank" size={13} /> Current Savings ($)</label>
           <input type="number" min="0" step="0.01" placeholder="e.g. 3000"
             value={currentSavings} onChange={(e) => setCurrentSavings(e.target.value)} />
         </div>
@@ -92,16 +75,18 @@ export default function InputForm({ onSubmit, loading }) {
 
       <div className="form-section">
         <div className="form-section-header">
-          <label className="section-label">📋 Monthly Expenses</label>
-          <button type="button" className="btn-add" onClick={addExpense}>+ Add Row</button>
+          <label className="section-label"><Icon name="grid" size={13} /> Monthly Expenses</label>
+          <button type="button" className="btn-add" onClick={addExpense}>
+            <Icon name="plus" size={12} /> Add Row
+          </button>
         </div>
         <div className="expense-list">
           {expenses.map((exp, i) => (
             <div key={i} className="expense-row">
-              <span className="exp-row-icon">{getCatIcon(exp.category)}</span>
+              <span className="exp-row-icon"><Icon name={iconForCategory(exp.category)} size={16} /></span>
               <select className="expense-cat-select" value={exp.category}
                 onChange={(e) => updateExpense(i, "category", e.target.value)}>
-                {CATEGORIES.map((c) => (
+                {EXPENSE_CATEGORIES.map((c) => (
                   <option key={c.label} value={c.label}>{c.label}</option>
                 ))}
               </select>
@@ -109,14 +94,16 @@ export default function InputForm({ onSubmit, loading }) {
                 value={exp.amount} onChange={(e) => updateExpense(i, "amount", e.target.value)}
                 className="expense-amt" />
               <button type="button" className="btn-remove" onClick={() => removeExpense(i)}
-                disabled={expenses.length === 1}>×</button>
+                disabled={expenses.length === 1} aria-label="Remove expense">
+                <Icon name="close" size={13} />
+              </button>
             </div>
           ))}
         </div>
       </div>
 
       <div className="form-section">
-        <label className="section-label">🎯 Financial Goal (optional)</label>
+        <label className="section-label"><Icon name="target" size={13} /> Financial Goal (optional)</label>
         <div className="form-row three-col">
           <div className="form-group">
             <label>Goal Description</label>
@@ -136,9 +123,9 @@ export default function InputForm({ onSubmit, loading }) {
         </div>
       </div>
 
-      {formError && <div className="error-msg">⚠ {formError}</div>}
+      {formError && <div className="error-msg"><Icon name="warning" size={14} /> {formError}</div>}
       <button type="submit" className="btn-primary" disabled={loading}>
-        {loading ? "Calculating…" : "Analyze My Finances →"}
+        {loading ? "Calculating…" : <>Analyze My Finances <Icon name="arrow-right" size={16} /></>}
       </button>
     </form>
   );

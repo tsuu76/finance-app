@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import Icon from "./Icon";
 
 const SUGGESTED = [
   "Can I afford this?",
@@ -64,13 +65,15 @@ export default function AIChat({ financialContext, apiBase }) {
       <div className="chat-messages">
         {messages.map((msg, i) => (
           <div key={i} className={`chat-bubble ${msg.role}`}>
-            <span className="bubble-icon">{msg.role === "assistant" ? "◈" : "▸"}</span>
+            {msg.role === "assistant" && (
+              <span className="bubble-icon"><Icon name="sparkle" size={14} /></span>
+            )}
             <p>{msg.text}</p>
           </div>
         ))}
         {loading && (
           <div className="chat-bubble assistant loading">
-            <span className="bubble-icon">◈</span>
+            <span className="bubble-icon"><Icon name="sparkle" size={14} /></span>
             <p>
               <span className="dot" />
               <span className="dot" />
@@ -111,7 +114,7 @@ export default function AIChat({ financialContext, apiBase }) {
           onClick={() => sendMessage()}
           disabled={loading || !input.trim()}
         >
-          Send
+          Send <Icon name="arrow-right" size={14} />
         </button>
       </div>
     </div>

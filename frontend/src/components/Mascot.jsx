@@ -1,30 +1,43 @@
-export default function Logo({ size = 32 }) {
+/*
+  Brand mascot — a minimalist line-art Parasaurolophus.
+  Used sparingly: empty states, onboarding, loading and transition
+  moments, and the odd micro-interaction. Never as decoration.
+
+  variant="idle"    — gentle breathing sway (default)
+  variant="loading"  — faster sway, reads as "thinking"
+  variant="still"    — no animation (respects prefers-reduced-motion too)
+*/
+
+export default function Mascot({ size = 96, variant = "idle", className = "" }) {
   return (
     <svg
       width={size}
-      height={size}
-      viewBox="0 0 40 40"
+      height={(size * 160) / 240}
+      viewBox="0 0 240 160"
       fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-label="CashFlo"
+      className={`mascot mascot-${variant} ${className}`.trim()}
+      aria-hidden="true"
     >
-      <circle cx="20" cy="20" r="19" fill="#ffffff" stroke="#bbbfbf" strokeWidth="1" />
-      <circle cx="20" cy="20" r="18.25" stroke="#878787" strokeWidth="0.75" opacity="0.55" />
-
-      {/* Mascot — same line-art Parasaurolophus as Mascot.jsx, scaled to fit the badge */}
-      <g transform="translate(6.2, 10.8) scale(0.115)" stroke="#05ad98" fill="none">
+      <g className="mascot-body">
+        {/* Legs (behind body line) */}
         <path
+          className="mascot-leg"
           d="M78 100 L74 142 M67 142 L82 142"
+          stroke="currentColor"
           strokeWidth="2.5"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path
+          className="mascot-leg mascot-leg-front"
           d="M150 88 L146 142 M137 142 L154 142"
+          stroke="currentColor"
           strokeWidth="2.5"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
+
+        {/* Body / neck / head / crest / bill silhouette */}
         <path
           d="M14 128
              C 12 118 30 112 40 118
@@ -45,11 +58,14 @@ export default function Logo({ size = 32 }) {
              C 112 106 98 104 88 108
              C 74 113 62 116 60 118
              C 46 124 30 126 14 128 Z"
+          stroke="currentColor"
           strokeWidth="2.25"
           strokeLinejoin="round"
           strokeLinecap="round"
         />
-        <circle cx="176" cy="25" r="2.1" fill="#05ad98" stroke="none" />
+
+        {/* Eye */}
+        <circle className="mascot-eye" cx="176" cy="25" r="2.1" fill="currentColor" />
       </g>
     </svg>
   );

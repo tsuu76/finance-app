@@ -1,0 +1,47 @@
+/* ── Goals tab ── */
+
+.goals-page { display: flex; flex-direction: column; gap: var(--space-7); padding-top: var(--space-2); }
+
+.goals-header { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap; }
+.goals-title { font-family: var(--font-display); font-size: var(--text-2xl); font-weight: 600; }
+.goals-sub { color: var(--ink-soft); margin-top: 4px; font-size: var(--text-base); }
+
+.goal-add-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  background-color: var(--paper-raised);
+  background-image: var(--texture-fine);
+  border: 1px solid var(--gold-300);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+}
+
+.goals-fan-wrap {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-6) 0 var(--space-8);
+}
+
+.goal-detail { display: flex; flex-direction: column; gap: var(--space-4); }
+.goal-detail-header { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-3); flex-wrap: wrap; }
+.goal-detail-title { display: flex; align-items: center; gap: 8px; font-size: var(--text-lg); color: var(--jade-800); }
+.goal-detail-title .icon { color: var(--jade-700); }
+.goal-detail-remaining { margin-top: 4px; color: var(--ink-soft); font-family: var(--font-mono); font-size: var(--text-sm); }
+.goal-detail-actions { display: flex; gap: var(--space-2); }
+.goal-delete:hover { color: var(--negative) !important; }
+
+.goal-progress-track { height: 8px; background: var(--paper-sunken); border-radius: var(--radius-pill); overflow: hidden; }
+.goal-progress-fill { height: 100%; background: linear-gradient(90deg, var(--jade-500), var(--jade-600)); border-radius: var(--radius-pill); transition: width var(--dur-slow) var(--ease-out); }
+
+.goal-contribute-row { display: flex; gap: var(--space-3); }
+.goal-contribute-row input { max-width: 220px; }
+
+.goal-edit-form { display: flex; gap: var(--space-3); align-items: center; flex-wrap: wrap; width: 100%; }
+.goal-edit-form input[type="text"] { max-width: 220px; }
+.goal-edit-form input[type="number"] { max-width: 140px; }
+
+@media (max-width: 560px) {
+  .goals-fan-wrap { padding: var(--space-4) 0 var(--space-6); overflow-x: auto; }
+  .goal-contribute-row input { max-width: none; flex: 1; }
+}

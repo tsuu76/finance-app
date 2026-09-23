@@ -44,13 +44,13 @@ def generate_insights(current: dict, history: list[dict], prev_expenses: list[di
                 if change_pct >= 20:
                     insights.append({
                         "type": "warning",
-                        "icon": "📈",
+                        "icon": "trend-up",
                         "message": f"Your {exp['category']} spending is up {change_pct:.0f}% vs last month (${prev:,.0f} → ${amount:,.0f})."
                     })
                 elif change_pct <= -15:
                     insights.append({
                         "type": "success",
-                        "icon": "📉",
+                        "icon": "trend-down",
                         "message": f"Nice — you spent {abs(change_pct):.0f}% less on {exp['category']} compared to last month."
                     })
 
@@ -58,19 +58,19 @@ def generate_insights(current: dict, history: list[dict], prev_expenses: list[di
     if savings_rate < 0:
         insights.append({
             "type": "warning",
-            "icon": "🚨",
+            "icon": "warning",
             "message": f"You're spending ${abs(monthly_savings):,.0f} more than you earn. Cut expenses immediately."
         })
     elif savings_rate < 10:
         insights.append({
             "type": "warning",
-            "icon": "⚠️",
+            "icon": "warning",
             "message": f"Your savings rate is {savings_rate}%. Aim for at least 20% — try cutting your largest expense category."
         })
     elif savings_rate >= 20:
         insights.append({
             "type": "success",
-            "icon": "✅",
+            "icon": "check-circle",
             "message": f"Strong savings rate of {savings_rate}%. You're building wealth consistently."
         })
 
@@ -80,7 +80,7 @@ def generate_insights(current: dict, history: list[dict], prev_expenses: list[di
         if top["percentage"] > 40:
             insights.append({
                 "type": "info",
-                "icon": "🔍",
+                "icon": "info",
                 "message": f"{top['category']} takes up {top['percentage']}% of your expenses. Make sure this is unavoidable."
             })
 
@@ -91,7 +91,7 @@ def generate_insights(current: dict, history: list[dict], prev_expenses: list[di
         if months_to_goal and months_to_goal > 0:
             insights.append({
                 "type": "info",
-                "icon": "🎯",
+                "icon": "target",
                 "message": f"Saving ${daily_savings:,.2f}/day keeps you on track to reach {goal_label} in {months_to_goal:.1f} months."
             })
 
@@ -99,7 +99,7 @@ def generate_insights(current: dict, history: list[dict], prev_expenses: list[di
             daily_extra = shortfall / days_in_month
             insights.append({
                 "type": "warning",
-                "icon": "⏱️",
+                "icon": "clock",
                 "message": f"To hit {goal_label} in {timeframe} months, cut daily spending by ${daily_extra:,.2f} or find extra income."
             })
 
@@ -109,13 +109,13 @@ def generate_insights(current: dict, history: list[dict], prev_expenses: list[di
         gap = three_months_expenses - current_savings
         insights.append({
             "type": "tip",
-            "icon": "🛡️",
+            "icon": "shield",
             "message": f"You're ${gap:,.0f} short of a 3-month emergency fund (${three_months_expenses:,.0f}). Prioritise this before other goals."
         })
     else:
         insights.append({
             "type": "success",
-            "icon": "🛡️",
+            "icon": "shield",
             "message": f"Your emergency fund covers {current_savings / total_expenses:.1f} months of expenses. Well covered."
         })
 
@@ -128,13 +128,13 @@ def generate_insights(current: dict, history: list[dict], prev_expenses: list[di
             if trend > 10:
                 insights.append({
                     "type": "warning",
-                    "icon": "📊",
+                    "icon": "trend-up",
                     "message": f"Your total spending has trended up {trend:.0f}% over the last 2 months. Check what's driving it."
                 })
             elif trend < -10:
                 insights.append({
                     "type": "success",
-                    "icon": "📊",
+                    "icon": "trend-down",
                     "message": f"Total spending is down {abs(trend):.0f}% over 2 months. Great discipline."
                 })
 

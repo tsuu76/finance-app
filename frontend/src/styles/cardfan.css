@@ -1,0 +1,151 @@
+/* ── CardFan — shared visual language for Intro + Goals ── */
+
+.card-fan {
+  --fan-spacing: 104px;
+  position: relative;
+  height: 232px;
+  display: flex;
+  justify-content: center;
+}
+
+.cf-slot {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 148px;
+  transform-origin: 50% 100%;
+  transition: transform var(--dur-intro) var(--ease-out);
+  will-change: transform;
+}
+
+.cf-interactive { cursor: pointer; }
+
+.cf-card {
+  position: relative;
+  width: 148px;
+  height: 204px;
+  background-color: var(--paper-raised);
+  background-image: var(--texture-fine);
+  border: 1px solid var(--gold-300);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-4) var(--space-3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  transition: transform var(--dur-fast) var(--ease-spring),
+              box-shadow var(--dur-fast) var(--ease-out),
+              border-color var(--dur-fast) var(--ease-out);
+}
+
+.cf-interactive .cf-card { cursor: pointer; }
+
+.cf-interactive .cf-slot:hover .cf-card,
+.cf-card:focus-visible {
+  transform: translateY(-14px) scale(1.035);
+  box-shadow: var(--shadow-card-hover);
+  border-color: var(--gold-500);
+  outline: none;
+}
+
+.cf-card-selected {
+  border-color: var(--jade-500);
+  box-shadow: var(--shadow-jade);
+}
+
+.cf-interactive .cf-slot:active .cf-card {
+  transform: translateY(-6px) scale(1.01);
+}
+
+/* ── Card face anatomy ── */
+.cf-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm);
+  background: var(--jade-050);
+  color: var(--jade-700);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.cf-label {
+  margin-top: var(--space-3);
+  max-width: 98px;
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--ink);
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+.cf-sublabel {
+  margin-top: 2px;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.cf-spacer { flex: 1; }
+
+.cf-fill-track {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.cf-fill {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, var(--jade-100), var(--jade-050));
+  border-top: 1px solid var(--jade-400);
+  transition: height var(--dur-slow) var(--ease-out);
+}
+
+.cf-card > * { position: relative; z-index: 1; }
+
+.cf-progress-badge {
+  align-self: flex-end;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--gold-800);
+  background: var(--gold-100);
+  border: 1px solid var(--gold-300);
+  border-radius: var(--radius-pill);
+  padding: 2px 8px;
+}
+
+.cf-amounts {
+  max-width: 112px;
+  margin: 0 auto;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--ink-soft);
+}
+.cf-amounts strong { color: var(--ink); font-weight: 500; }
+
+/* Responsive shrink for narrower viewports — spacing and card size
+   shrink together so the fan never overflows the screen. */
+@media (max-width: 640px) {
+  .card-fan { --fan-spacing: 84px; height: 220px; }
+  .cf-slot, .cf-card { width: 134px; }
+  .cf-card { height: 190px; }
+}
+
+@media (max-width: 420px) {
+  .card-fan { --fan-spacing: 64px; height: 202px; }
+  .cf-slot, .cf-card { width: 112px; }
+  .cf-card { height: 168px; padding: var(--space-3) var(--space-2); }
+  .cf-label { max-width: 82px; font-size: var(--text-sm); }
+  .cf-amounts { max-width: 90px; }
+}

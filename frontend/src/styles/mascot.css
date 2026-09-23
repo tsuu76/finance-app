@@ -1,0 +1,19 @@
+/* ── Mascot — used sparingly; a quiet signature, not decoration ── */
+
+.mascot { color: var(--jade-700); overflow: visible; }
+.mascot-eye { color: var(--gold-600); }
+
+.mascot-idle .mascot-body {
+  transform-origin: 90px 128px;
+  animation: mascot-breathe 4.2s var(--ease-in-out) infinite;
+}
+.mascot-loading .mascot-body {
+  transform-origin: 90px 128px;
+  animation: mascot-breathe 1.5s var(--ease-in-out) infinite;
+}
+.mascot-still .mascot-body { animation: none; }
+
+@keyframes mascot-breathe {
+  0%, 100% { transform: rotate(0deg) translateY(0); }
+  50%      { transform: rotate(-1.1deg) translateY(-2px); }
+}

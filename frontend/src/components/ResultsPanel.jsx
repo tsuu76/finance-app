@@ -1,3 +1,6 @@
+import Icon from "./Icon";
+import { iconForCategory } from "../utils/categories";
+
 function fmt(n) {
   if (n === null || n === undefined) return "—";
   return "$" + Number(n).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -5,7 +8,7 @@ function fmt(n) {
 
 function fmtMonths(n) {
   if (n === null || n === undefined) return "—";
-  if (n === 0) return "Already reached! 🎉";
+  if (n === 0) return "Already reached!";
   const months = Math.ceil(n);
   if (months >= 12) {
     const y = Math.floor(months / 12);
@@ -17,7 +20,7 @@ function fmtMonths(n) {
 
 function SavingsBar({ rate }) {
   const clamped = Math.min(Math.max(rate, 0), 100);
-  const color = rate < 0 ? "#e74c3c" : rate < 10 ? "#e67e22" : rate < 20 ? "#f1c40f" : "#27ae60";
+  const color = rate < 0 ? "var(--negative)" : rate < 10 ? "var(--warning)" : rate < 20 ? "var(--gold-500)" : "var(--positive)";
   return (
     <div className="savings-bar-track">
       <div
@@ -94,12 +97,12 @@ export default function ResultsPanel({ results }) {
             <SavingsBar rate={savings_rate} />
             <span className="rate-note">
               {savings_rate < 0
-                ? "⚠ You're spending more than you earn"
+                ? "You're spending more than you earn"
                 : savings_rate < 10
                 ? "Low — aim for 20%+"
                 : savings_rate < 20
                 ? "Decent — push toward 20%"
-                : "Healthy savings rate ✓"}
+                : "Healthy savings rate"}
             </span>
           </div>
         </div>
@@ -111,7 +114,10 @@ export default function ResultsPanel({ results }) {
         <div className="expense-breakdown">
           {expense_breakdown.map((exp, i) => (
             <div key={i} className="exp-row">
-              <span className="exp-cat">{exp.category}</span>
+              <span className="exp-cat">
+                <Icon name={iconForCategory(exp.category)} size={14} className="exp-cat-icon" />
+                {exp.category}
+              </span>
               <div className="exp-bar-wrapper">
                 <ExpenseBar percentage={exp.percentage} />
               </div>
@@ -179,7 +185,7 @@ export default function ResultsPanel({ results }) {
               <div className="calc-step success">
                 <span className="calc-label">On track!</span>
                 <span className="calc-expr">
-                  Your current savings rate is sufficient to meet your goal on time. ✓
+                  <Icon name="check-circle" size={13} /> Your current savings rate is sufficient to meet your goal on time.
                 </span>
               </div>
             )}
