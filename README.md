@@ -4,9 +4,9 @@
 
 CashFlo is a personal finance web app: enter your income and monthly expenses and get an instant, honest breakdown of where your money goes — savings rate, expense categories, rule-based Smart Insights, an AI Advisor grounded in your real numbers, and goal tracking that shows exactly how long you'll take to get there.
 
-<video src="docs/media/cashflo-demo.mp4" poster="docs/media/cashflo-demo-poster.jpg" controls width="100%"></video>
+[![CashFlo demo preview](docs/media/cashflo-demo-preview.gif)](docs/media/cashflo-demo.mp4)
 
-*(If the video above doesn't render, [watch it directly](docs/media/cashflo-demo.mp4).)*
+*Preview above is the first 8 seconds. [▶ Watch the full 35-second demo](docs/media/cashflo-demo.mp4) (downloads/plays the MP4).*
 
 ## Features
 
